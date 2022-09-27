@@ -1,27 +1,31 @@
-# `astetrio-site`
+# Goldsemi (goldsemi)
 
-This project is bootstrapped by [aurelia-cli](https://github.com/aurelia/cli).
+Купить Клей ПВА Exclusive в Ташкенте, Узбекистан, полный каталог с ценами и фото. Продажа оптом и в розницу
 
-For more information, go to https://aurelia.io/docs/cli/webpack
+## Install the dependencies
 
-## Run dev app
+```bash
+yarn
+```
 
-Run `npm start`, then open `http://localhost:8080`
+### Start the app in development mode (hot-code reloading, error reporting, etc.)
 
-You can change the standard webpack configurations from CLI easily with something like this: `npm start -- --open --port 8888`. However, it is better to change the respective npm scripts or `webpack.config.js` with these options, as per your need.
+```bash
+quasar dev
+```
 
-To enable Webpack Bundle Analyzer, do `npm run analyze` (production build).
+### Lint the files
 
-To enable hot module reload, do `npm start -- --hmr`.
+```bash
+yarn run lint
+```
 
-To change dev server port, do `npm start -- --port 8888`.
+### Build the app for production
 
-To change dev server host, do `npm start -- --host 127.0.0.1`
+```bash
+quasar build
+```
 
-**PS:** You could mix all the flags as well, `npm start -- --host 127.0.0.1 --port 7070 --open --hmr`
+### Customize the configuration
 
-For long time aurelia-cli user, you can still use `au run` with those arguments like `au run --env prod --open --hmr`. But `au run` now simply executes `npm start` command.
-
-## Build for production
-
-Run `npm run build`, or the old way `au build --env prod`.
+See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).

@@ -1,77 +1,60 @@
 {
-  "name": "astetrio-site",
-  "description": "An Aurelia client application.",
-  "version": "0.1.0",
-  "repository": {
-    "type": "???",
-    "url": "???"
+  "name": "astetrio",
+  "version": "0.0.1",
+  "description": "Astetrio main site",
+  "productName": "Astetrio",
+  "author": "Astetrio <astetrio.dev.supp@gmail.com>",
+  "private": true,
+  "scripts": {
+    "lint": "eslint --ext .js,.ts,.vue ./",
+    "format": "prettier --config .prettierrc \"./src/**/*.(js|ts|vue)\" --write",
+    "test": "echo \"No test specified\" && exit 0",
+    "dev": "pm2 start quasar --name dev -- dev",
+    "debug": "quasar dev",
+    "build": "quasar build",
+    "build:pwa": "quasar build -m pwa"
   },
-  "license": "MIT",
   "dependencies": {
-    "aurelia-bootstrapper": "^2.4.0",
-    "aurelia-animator-css": "^1.0.4",
-    "whatwg-fetch": "^3.6.2",
-    "aurelia-fetch-client": "^1.8.2",
-    "bootstrap": "^4.6.1",
-    "popper.js": "^1.16.1",
-    "@fortawesome/fontawesome-free": "^5.15.4",
-    "jquery": "^3.6.0"
+    "@quasar/extras": "^1.0.0",
+    "@types/ol": "^6.4.2",
+    "@vue/composition-api": "^1.0.0-rc.6",
+    "axios": "^0.18.1",
+    "core-js": "^3.6.5",
+    "ol": "^6.4.3",
+    "quasar": "^1.0.0",
+    "text-to-image": "^4.0.0",
+    "vue-google-maps-typescript": "^0.1.4",
+    "vue-i18n": "^8.0.0"
   },
   "devDependencies": {
-    "eslint": "^8.15.0",
-    "aurelia-cli": "^3.0.0",
-    "aurelia-testing": "^1.1.0",
-    "gulp": "^4.0.2",
-    "gulp-eslint": "^6.0.0",
-    "minimatch": "^5.1.0",
-    "promise-polyfill": "^8.2.3",
-    "typescript": "^4.6.4",
-    "tslib": "^2.4.0",
-    "@types/node": "^17.0.35",
-    "@typescript-eslint/eslint-plugin": "^5.25.0",
-    "@typescript-eslint/parser": "^5.25.0",
-    "ts-loader": "^9.3.0",
-    "@types/webpack": "^5.28.0",
-    "postcss-loader": "^7.0.0",
-    "postcss": "^8.4.14",
-    "autoprefixer": "^10.4.7",
-    "cssnano": "^5.1.8",
-    "sass-loader": "^13.0.0",
-    "sass": "^1.52.0",
-    "html-webpack-plugin": "^5.5.0",
-    "copy-webpack-plugin": "^11.0.0",
-    "mini-css-extract-plugin": "^2.6.0",
-    "aurelia-webpack-plugin": "^5.0.4",
-    "duplicate-package-checker-webpack-plugin": "^3.0.0",
-    "clean-webpack-plugin": "^4.0.0",
-    "webpack": "^5.72.1",
-    "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.9.0",
-    "expose-loader": "^4.0.0",
-    "style-loader": "^3.3.1",
-    "css-loader": "^6.7.1",
-    "app-settings-loader": "^2.0.5",
-    "json-loader": "^0.5.7",
-    "html-loader": "^3.1.0",
-    "webpack-bundle-analyzer": "^4.5.0",
-    "tree-kill": "^1.2.2"
+    "@quasar/app": "^2.0.0",
+    "@types/node": "^10.17.15",
+    "@typescript-eslint/eslint-plugin": "^3.3.0",
+    "@typescript-eslint/parser": "^3.3.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-loader": "^3.0.3",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-vue": "^7.8.0",
+    "prerender-spa-plugin": "^3.4.0",
+    "prettier": "^2.2.1"
   },
   "browserslist": [
-    "defaults"
+    "last 10 Chrome versions",
+    "last 10 Firefox versions",
+    "last 4 Edge versions",
+    "last 7 Safari versions",
+    "last 8 Android versions",
+    "last 8 ChromeAndroid versions",
+    "last 8 FirefoxAndroid versions",
+    "last 10 iOS versions",
+    "last 5 Opera versions"
   ],
-  "scripts": {
-    "build": "webpack --env production",
-    "start": "webpack server",
-    "build:dev": "webpack",
-    "analyze": "webpack --env production --analyze"
-  },
   "engines": {
-    "node": ">=14.15.0"
-  },
-  "overrides": {
-    "chokidar": "^3.0.0",
-    "glob-stream": "^7.0.0",
-    "glob-parent": "^6.0.0",
-    "micromatch": "^4.0.0"
+    "node": ">= 10.18.1",
+    "npm": ">= 6.13.4",
+    "yarn": ">= 1.21.1"
   }
 }
+
