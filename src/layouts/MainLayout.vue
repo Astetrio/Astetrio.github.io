@@ -310,8 +310,8 @@ export default defineComponent({
 }
 
 .languages {
-  &::v-deep .q-field__marginal,
-  &::v-deep .q-field__native {
+  &:deep(.q-field__marginal),
+  &:deep(.q-field__native) {
     color: #ffeb3b;
   }
 }

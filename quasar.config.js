@@ -89,13 +89,17 @@ module.exports = configure(function (ctx) {
         cfg.plugins.push(
           new PrerenderSPAPlugin({
             staticDir: path.join(__dirname, 'dist', 'spa'),
-            routes: ['/'],
-            postProcess(context) {
-              context.html = context.html.replaceAll('http://localhost:8000', 'https://goldsemi.uz');
-              context.html = context.html.replaceAll(/(<link href="\/css\/vendor\..+?\.css") rel="stylesheet"(>)/gm, '$1 rel="preload" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"$2');
-              context.html = context.html.replaceAll(/(<script src="\/js\/vendor\..+\.js")(><\/script>)/gm, '$1 defer$2');
+            routes: ['/', '/404'],
+            postProcess(renderedRoute) {
+              //renderedRoute.html = renderedRoute.html.replaceAll('http://localhost:8000', 'https://goldsemi.uz');
+              //renderedRoute.html = renderedRoute.html.replaceAll(/(<link href="\/css\/vendor\..+?\.css") rel="stylesheet"(>)/gm, '$1 rel="preload" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"$2');
+              //renderedRoute.html = renderedRoute.html.replaceAll(/(<script src="\/js\/vendor\..+\.js")(><\/script>)/gm, '$1 defer$2');
 
-              return context;
+              if (renderedRoute.route == '/404') {
+                renderedRoute.outputPath = '404.html';
+              }
+
+              return renderedRoute;
             },
           }),
         );
