@@ -3,3 +3,175 @@ html {
   scroll-behavior: smooth;
 }
 
+body {
+  color: #445161;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #283341;
+  line-height: 1.1;
+  font-weight: 500;
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  font-size: 34px;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+h3 {
+  font-size: 26px;
+}
+
+h2 small {
+  color: #bec3ca;
+}
+
+small {
+  font-size: 20px;
+  font-weight: normal;
+}
+
+.q-menu {
+  background: rgba(196, 144, 32, 0.75);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px 0 rgba(131, 138, 135, 0.37);
+  backdrop-filter: blur(4px);
+}
+
+.q-select__dialog {
+  background: rgba(196, 144, 32, 0.5);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px 0 rgba(131, 138, 135, 0.37);
+  backdrop-filter: blur(8px);
+}
+
+.list-style-none {
+  list-style-type: none;
+}
+
+.afterline::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 2px;
+  margin: 8px 0;
+  background: currentColor;
+}
+
+.container {
+  width: 100%;
+}
+
+body.desktop .q-focusable:focus > .q-focus-helper,
+body.desktop .q-manual-focusable--focused > .q-focus-helper,
+body.desktop .q-hoverable:hover > .q-focus-helper {
+  opacity: 0.35;
+}
+
+a {
+  color: #fafafa;
+  text-decoration: none;
+  transition: color 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+a:hover {
+  color: $accent;
+}
+
+@media (min-width: $breakpoint-xs) {
+  .lead {
+    font-size: 21px;
+  }
+}
+@media (min-width: $breakpoint-sm) {
+  body {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  h1 {
+    font-size: 46px;
+  }
+
+  h2 {
+    font-size: 40px;
+  }
+
+  h3 {
+    font-size: 34px;
+  }
+
+  h4 {
+    font-size: 28px;
+  }
+
+  small {
+    font-size: 26px;
+  }
+
+  .page-header {
+    padding-bottom: 20px;
+  }
+
+  .form-control {
+    font-size: 16px;
+    height: 40px;
+  }
+
+  .btn {
+    font-size: 16px;
+    padding: 9px 20px;
+  }
+
+  .products .check-list {
+    font-size: 20px;
+  }
+
+  .scrinshots .media .pull-left > img {
+    width: 200px;
+  }
+
+  .buy .price .head {
+    font-size: 30px;
+    padding: 15px 0;
+  }
+
+  .buy .price .head h3 span {
+    font-size: 40px;
+  }
+
+  .buy .price .body .btn {
+    font-size: 18px;
+  }
+
+  .subscribe-form input[type='email'] {
+    width: 300px;
+  }
+}
+
+@media (min-width: $breakpoint-md-min) {
+  .container {
+    width: $breakpoint-md-min - 48px;
+  }
+
+  .section {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+}
+
+@media (min-width: $breakpoint-lg-min) {
+  .container {
+    width: $breakpoint-lg-min - 48px;
+  }
+}

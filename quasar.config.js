@@ -90,7 +90,11 @@ module.exports = configure(function (ctx) {
 
         cfg.plugins.push(
           new PurgeCSSPlugin({
-            paths: glob.sync([path.join(__dirname, './src/**/*.vue'), path.join(__dirname, './src/**/*.scss')]),
+            paths: glob.sync([path.join(__dirname, './src/**/*.vue'), path.join(__dirname, './src/**/*.scss'), path.join(__dirname, './node_modules/quasar/src/components/**/*.js')]),
+            //paths: glob.sync([path.join(__dirname, './dist/**/*.html'), path.join(__dirname, './src/**/*.js'), path.join(__dirname, './src/**/*.css')]),
+            safelist: {
+              standard: [/data-v-.*/],
+            },
           }),
           new PrerenderSPAPlugin({
             staticDir: path.join(__dirname, 'dist', 'spa'),
