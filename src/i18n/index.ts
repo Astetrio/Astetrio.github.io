@@ -1,7 +1,5 @@
-import ru from './ru';
-import uz from './uz';
+import enUS from './en-US';
 
 export default {
-  ru,
-  uz,
+  'en-US': enUS
 };

@@ -7,25 +7,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
-//import Axios from 'app/node_modules/axios';
+import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'PageIndex',
-
-  components: {},
-
-  /*setup() {
-    let target = process.env.DEV ? 'http://localhost:8000' : 'https://api.goldsemi.uz';
-
-    Axios.get(target + '/products')
-      .then((x) => {
-        console.log(x.data);
-      })
-      .catch((x) => {
-        console.log(x);
-      });
-  },*/
+  name: 'IndexPage',
 });
 </script>
 
