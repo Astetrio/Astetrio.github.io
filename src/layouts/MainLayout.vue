@@ -237,14 +237,14 @@ export default defineComponent({
 //@import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
 
 /* [118] */
-@font-face {
-  font-family: 'Dela Gothic One';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/delagothicone/v4/hESp6XxvMDRA-2eD0lXpDa6QkBAGQCMZQhgpMHvQclGQe7meVsqPbDrj6fo.118.woff2) format('woff2');
-  unicode-range: U+21-22, U+27-2a, U+2c-3b, U+3f, U+41-4d, U+4f-5d, U+61-7b, U+7d, U+ab, U+ae, U+b2-b3, U+b7, U+bb, U+c9, U+cd, U+d6, U+d8, U+dc, U+e0-e5, U+e7-ed, U+ef, U+f1-f4, U+f6, U+f8, U+fa, U+fc-fd, U+103, U+14d, U+1b0, U+300-301, U+1ebf, U+1ec7, U+2013-2014, U+201c-201d, U+2039-203a, U+203c, U+2048-2049, U+2113, U+2122, U+65e5, U+6708, U+70b9;
-}
+// @font-face {
+//   font-family: 'Dela Gothic One';
+//   font-style: normal;
+//   font-weight: 400;
+//   font-display: swap;
+//   src: url(https://fonts.gstatic.com/s/delagothicone/v4/hESp6XxvMDRA-2eD0lXpDa6QkBAGQCMZQhgpMHvQclGQe7meVsqPbDrj6fo.118.woff2) format('woff2');
+//   unicode-range: U+21-22, U+27-2a, U+2c-3b, U+3f, U+41-4d, U+4f-5d, U+61-7b, U+7d, U+ab, U+ae, U+b2-b3, U+b7, U+bb, U+c9, U+cd, U+d6, U+d8, U+dc, U+e0-e5, U+e7-ed, U+ef, U+f1-f4, U+f6, U+f8, U+fa, U+fc-fd, U+103, U+14d, U+1b0, U+300-301, U+1ebf, U+1ec7, U+2013-2014, U+201c-201d, U+2039-203a, U+203c, U+2048-2049, U+2113, U+2122, U+65e5, U+6708, U+70b9;
+// }
 
 .svg-defs {
   position: absolute;
@@ -273,7 +273,7 @@ export default defineComponent({
 }
 
 .logo {
-  font-family: 'Dela Gothic One'; //, 'New Tegomin', 'Indie Flower', 'Train One', 'Permanent Marker';
+  //font-family: 'Dela Gothic One'; //, 'New Tegomin', 'Indie Flower', 'Train One', 'Permanent Marker';
 
   line-height: 1;
 
