@@ -12,7 +12,9 @@
 
 const { configure } = require('quasar/wrappers');
 const path = require('path');
+const glob = require('glob-all');
 const PrerenderSPAPlugin = require('prerender-spa-plugin-next');
+const { PurgeCSSPlugin } = require('purgecss-webpack-plugin');
 
 module.exports = configure(function (ctx) {
   return {
@@ -87,13 +89,16 @@ module.exports = configure(function (ctx) {
         }*/
 
         cfg.plugins.push(
+          new PurgeCSSPlugin({
+            paths: glob.sync([path.join(__dirname, './src/**/*.vue'), path.join(__dirname, './src/**/*.scss')]),
+          }),
           new PrerenderSPAPlugin({
             staticDir: path.join(__dirname, 'dist', 'spa'),
             routes: ['/', '/404'],
             postProcess(renderedRoute) {
-              //renderedRoute.html = renderedRoute.html.replaceAll('http://localhost:8000', 'https://goldsemi.uz');
-              //renderedRoute.html = renderedRoute.html.replaceAll(/(<link href="\/css\/vendor\..+?\.css") rel="stylesheet"(>)/gm, '$1 rel="preload" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"$2');
-              //renderedRoute.html = renderedRoute.html.replaceAll(/(<script src="\/js\/vendor\..+\.js")(><\/script>)/gm, '$1 defer$2');
+              renderedRoute.html = renderedRoute.html.replaceAll('http://localhost:8000', 'https://goldsemi.uz');
+              renderedRoute.html = renderedRoute.html.replaceAll(/(<link href="\/css\/vendor\..+?\.css") rel="stylesheet"(>)/gm, '$1 rel="preload" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"$2');
+              renderedRoute.html = renderedRoute.html.replaceAll(/(<script src="\/js\/vendor\..+\.js")(><\/script>)/gm, '$1 defer$2');
 
               if (renderedRoute.route == '/404') {
                 renderedRoute.outputPath = '404.html';

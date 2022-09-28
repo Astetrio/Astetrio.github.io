@@ -33,8 +33,10 @@
     "eslint": "^8.10.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-vue": "^9.0.0",
+    "glob-all": "^3.3.0",
     "prerender-spa-plugin-next": "^4.2.3",
-    "prettier": "^2.5.1"
+    "prettier": "^2.5.1",
+    "purgecss-webpack-plugin": "^5.0.0"
   },
   "browserslist": [
     "last 10 Chrome versions",
