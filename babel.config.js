@@ -2,8 +2,6 @@
 
 module.exports = (api) => {
   return {
-    ignore: ['./src'],
     presets: [['@quasar/babel-preset-app', api.caller((caller) => caller && caller.target === 'node') ? { targets: { node: 'current' } } : {}]],
   };
 };
-
