@@ -1,50 +1,6 @@
 <template>
-  <!-- <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
-
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
-      </q-toolbar>
-    </q-header>
-
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
-      <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
-
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer>
-
-    <q-page-container>
-      <router-view />
-    </q-page-container>
-  </q-layout> -->
   <q-layout view="hHh Lpr lff">
-    <q-header class="q-py-md row justify-center header" elevated>
+    <q-header class="q-py-md row justify-center bg-grey-2 header">
       <div class="container">
         <q-toolbar class="justify-center">
           <!-- <q-btn class="drawer-btn" rounded @click="toggleDrawer">
@@ -53,7 +9,7 @@
               <q-icon class="absolute-center" key="opened" v-else name="mdi-close" />
             </transition-group>
           </q-btn> -->
-          <q-toolbar-title class="col-12 col-sm row items-center justify-center text-yellow logo">
+          <q-toolbar-title class="col-12 col-sm row items-center justify-center logo">
             <!-- <svg class="svg-defs" width="600px" height="92px">
               <defs>
                 <linearGradient id="gradient" x1="0" y1="0" x2="110%" y2="0%">
@@ -98,7 +54,7 @@
               <text class="logo-text text-yellow" style="mask: url(#masking)" x="0" y="95%">GOLDSEMI</text>
             </svg> -->
 
-            <h1 class="logo-text text-yellow">Astetrio</h1>
+            <h1 class="logo-text text-black">Astetrio</h1>
             <!-- <q-img height="92px" :src="logoImage"></q-img> -->
             <q-img class="logo-icon" src="~assets/icon.svg" />
           </q-toolbar-title>
@@ -145,13 +101,13 @@
       <router-view />
     </q-page-container>
 
-    <q-footer class="row q-py-lg justify-center footer">
+    <q-footer class="row q-py-lg justify-center bg-grey-2 footer">
       <div class="row container q-px-sm-lg">
         <div class="column col-12 col-sm-offset-3 items-center">
           <!-- <h4 class="q-px-xl text-center afterline full-width">{{ $i18n.t('contacts') }}</h4> -->
           <div>
             <div class="column contacts">
-              <a href="mailto:astetrio.dev.supp@gmail.com">astetrio.dev.supp@gmail.com</a>
+              <a class="text-black" href="mailto:astetrio.dev.supp@gmail.com">astetrio.dev.supp@gmail.com</a>
               <!-- <a href="tg://resolve?domain=kley_goldsemi">@kley_goldsemi</a> -->
             </div>
           </div>
@@ -265,6 +221,10 @@ export default defineComponent({
   h4 {
     color: #ffff52;
   }
+
+  /*a {
+    color: #000000;
+  }*/
 }
 
 .drawer-btn {
@@ -290,6 +250,7 @@ export default defineComponent({
   &-icon {
     width: 44px;
     font-size: 2em;
+    filter: grayscale(1) brightness(0);
   }
 
   @media (min-width: $breakpoint-sm-max) {

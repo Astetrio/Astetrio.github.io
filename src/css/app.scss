@@ -3,10 +3,6 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
-  color: #445161;
-}
-
 h1,
 h2,
 h3,
@@ -30,10 +26,6 @@ h2 {
 
 h3 {
   font-size: 26px;
-}
-
-h2 small {
-  color: #bec3ca;
 }
 
 small {
@@ -79,13 +71,8 @@ body.desktop .q-hoverable:hover > .q-focus-helper {
 }
 
 a {
-  color: #fafafa;
   text-decoration: none;
   transition: color 100ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
-}
-
-a:hover {
-  color: $accent;
 }
 
 @media (min-width: $breakpoint-xs) {
