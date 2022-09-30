@@ -9,7 +9,7 @@
               <q-icon class="absolute-center" key="opened" v-else name="mdi-close" />
             </transition-group>
           </q-btn> -->
-          <q-toolbar-title class="col-12 col-sm row items-center justify-center logo">
+          <q-toolbar-title class="col-12 col-sm logo">
             <!-- <svg class="svg-defs" width="600px" height="92px">
               <defs>
                 <linearGradient id="gradient" x1="0" y1="0" x2="110%" y2="0%">
@@ -54,9 +54,11 @@
               <text class="logo-text text-yellow" style="mask: url(#masking)" x="0" y="95%">GOLDSEMI</text>
             </svg> -->
 
-            <h1 class="logo-text text-black">Astetrio</h1>
-            <!-- <q-img height="92px" :src="logoImage"></q-img> -->
-            <q-img class="logo-icon" src="~assets/icon.svg" />
+            <a class="row items-center justify-start" href="/">
+              <q-img no-spinner class="logo-icon" src="~assets/icon.svg" />
+              <h1 class="logo-text text-black">Astetrio</h1>
+              <!-- <q-img height="92px" :src="logoImage"></q-img> -->
+            </a>
           </q-toolbar-title>
         </q-toolbar>
       </div>
@@ -241,8 +243,12 @@ export default defineComponent({
     vertical-align: bottom;
   }
 
+  /*& > a {
+    display: block;
+  }*/
+
   &-text {
-    margin-right: 16px;
+    margin-left: 16px;
     font-size: 1em;
     // mask: url(#masking);
   }
