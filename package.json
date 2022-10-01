@@ -11,10 +11,8 @@
     "test": "echo \"No test specified\" && exit 0",
     "dev": "pm2 start quasar --name dev -- dev",
     "debug": "quasar dev",
-    "build": "quasar build",
-    "build:pwa": "quasar build -m pwa",
-    "deploy": "git subtree split --prefix dist/spa -b gh-pages && git push -f origin gh-pages:main && git branch -D gh-pages",
-    "build:deploy": "build && deploy"
+    "build": "quasar build -P",
+    "deploy": "git subtree split --prefix dist/spa -b gh-pages && git push -f origin gh-pages:main && git branch -D gh-pages"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
@@ -34,9 +32,12 @@
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-vue": "^9.0.0",
     "glob-all": "^3.3.0",
+    "html-webpack-plugin": "^5.5.0",
     "prerender-spa-plugin-next": "^4.2.3",
     "prettier": "^2.5.1",
-    "purgecss-webpack-plugin": "^5.0.0"
+    "puppeteer": "^18.0.5",
+    "purgecss-webpack-plugin": "^5.0.0",
+    "webpack": "^5.74.0"
   },
   "browserslist": [
     "last 10 Chrome versions",

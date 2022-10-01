@@ -14,6 +14,7 @@ const { configure } = require('quasar/wrappers');
 const path = require('path');
 const glob = require('glob-all');
 const PrerenderSPAPlugin = require('prerender-spa-plugin-next');
+const ScreenshotsTakePlugin = require('./utils/screenshots-take-plugin');
 const { PurgeCSSPlugin } = require('purgecss-webpack-plugin');
 
 module.exports = configure(function (ctx) {
@@ -111,6 +112,7 @@ module.exports = configure(function (ctx) {
               return renderedRoute;
             },
           }),
+          new ScreenshotsTakePlugin(),
         );
       },
     },
