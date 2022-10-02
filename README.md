@@ -4,4 +4,4 @@ Site of Astetrio Studio
 
 # Preview
 
-![alt](./preview.png)
+![alt Preview](./preview.png)
