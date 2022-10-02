@@ -12,9 +12,10 @@
 
 const { configure } = require('quasar/wrappers');
 const path = require('path');
+const fs = require('fs');
 const glob = require('glob-all');
 const PrerenderSPAPlugin = require('prerender-spa-plugin-next');
-const ScreenshotsTakePlugin = require('./utils/screenshots-take-plugin');
+const PuppeteerRenderer = require('./utils/custom-puppeteer-renderer');
 const { PurgeCSSPlugin } = require('purgecss-webpack-plugin');
 
 module.exports = configure(function (ctx) {
@@ -100,6 +101,25 @@ module.exports = configure(function (ctx) {
           new PrerenderSPAPlugin({
             staticDir: path.join(__dirname, 'dist', 'spa'),
             routes: ['/', '/404'],
+            renderer: new PuppeteerRenderer({
+              // size: {
+              //   x: 1920,
+              //   y: 1080,
+              // },
+              async postProcess(page) {
+                const p = path.join(__dirname, 'dist', 'spa');
+
+                if (!fs.existsSync(p)) {
+                  fs.mkdirSync(p);
+                }
+
+                fs.copyFileSync(path.join(__dirname, 'README.md'), path.join(p, 'README.md'));
+
+                await page.setViewport({ width: 1920, height: 1080 });
+                await page.screenshot({ path: path.join(p, 'preview.png') });
+                await page.screenshot({ path: path.join(__dirname, 'preview.png') });
+              },
+            }),
             postProcess(renderedRoute) {
               renderedRoute.html = renderedRoute.html.replaceAll('http://localhost:8000', 'https://goldsemi.uz');
               renderedRoute.html = renderedRoute.html.replaceAll(/(<link href="\/css\/vendor\..+?\.css") rel="stylesheet"(>)/gm, '$1 rel="preload" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"$2');
@@ -112,7 +132,6 @@ module.exports = configure(function (ctx) {
               return renderedRoute;
             },
           }),
-          new ScreenshotsTakePlugin(),
         );
       },
     },
