@@ -1,21 +1,30 @@
 <template>
   <q-page class="main">
-    <section class="column text-white items-center products section">
-      <div class="col q-px-lg justify-center container q-gutter-y-lg products_content"></div>
+    <section class="column text-black items-center projects">
+      <div class="col q-px-lg justify-center container q-gutter-y-lg projects_content">
+        <project-item></project-item>
+      </div>
     </section>
   </q-page>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import ProjectItem from '../components/ProjectItem.vue';
 
 export default defineComponent({
   name: 'IndexPage',
+
+  components: {
+    ProjectItem,
+  },
 });
 </script>
 
 <style lang="scss" scoped>
-.products {
+.projects {
+  padding-top: 16px;
+
   &_content {
     display: flex;
     flex-wrap: wrap;
@@ -35,15 +44,5 @@ export default defineComponent({
       grid-template-columns: auto auto auto;
     }
   }
-}
-
-.about {
-  padding: 16px;
-}
-
-.description {
-  grid-row: span 4;
-  grid-column: 2;
-  color: $text-color;
 }
 </style>
