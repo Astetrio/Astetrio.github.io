@@ -2,7 +2,14 @@
   <q-page class="main">
     <section class="column text-black items-center projects">
       <div class="col q-px-lg justify-center container q-gutter-y-lg projects_content">
-        <project-item></project-item>
+        <project-item thumbnail="~assets/crazy-stack.jpg" title="Crazy Stack" />
+        <!--<project-item thumbnail="~assets/crazy-stack.jpg" title="Crazy Stack" />
+        <project-item thumbnail="~assets/crazy-stack.jpg" title="Crazy Stack" />
+        <project-item thumbnail="~assets/crazy-stack.jpg" title="Crazy Stack" />
+        <project-item thumbnail="~assets/crazy-stack.jpg" title="Crazy Stack" />
+        <project-item thumbnail="~assets/crazy-stack.jpg" title="Crazy Stack" />
+        <project-item thumbnail="~assets/crazy-stack.jpg" title="Crazy Stack" />
+        <project-item thumbnail="~assets/crazy-stack.jpg" title="Crazy Stack" />-->
       </div>
     </section>
   </q-page>
@@ -24,6 +31,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .projects {
   padding-top: 16px;
+  padding-bottom: 16px;
 
   &_content {
     display: flex;

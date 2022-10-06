@@ -145,7 +145,7 @@ export default defineComponent({
   mounted() {
     const storedLocale = localStorage.getItem('locale');
 
-    this.$q.addressbarColor.set('#e2e35a');
+    //this.$q.addressbarColor.set('#e2e35a');
 
     if (storedLocale === null) {
       this.currentLocaleIndex = this.$i18n.availableLocales.findIndex((x) => x === 'uz');

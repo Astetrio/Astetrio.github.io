@@ -1,18 +1,12 @@
 <template>
-  <div class="column q-pa-sm justify-between items-center project">
-    <div class="col q-my-lg full-width full-height img">
+  <div class="column q-pb-sm overflow-hidden justify-between items-center project">
+    <div class="col q-mb-lg full-width full-height img">
       <q-intersection once class="inter">
-        <img :src="thumbnail" :alt="title" width="368px" height="243.5px" />
+        <!--<q-img :src="thumbnail" :alt="title" width="368px" height="243.5px" />-->
+        <img :src="thumbnail" :alt="title" />
       </q-intersection>
     </div>
     <h2 class="col-auto">{{ title }}</h2>
-    <h3 v-if="price" class="col-auto">{{ price }} {{ $i18n.t('sum') }}</h3>
-    <div class="col q-my-lg full-width full-height img">
-      <q-intersection once class="inter">
-        <img :src="usagePreview" :alt="usageTitle" width="368px" height="243.5px" />
-      </q-intersection>
-    </div>
-    <h2 class="col-auto">{{ usageTitle }}</h2>
   </div>
 </template>
 
@@ -24,10 +18,8 @@ export default defineComponent({
 
   props: {
     thumbnail: String,
-    usagePreview: String,
     title: String,
-    usageTitle: String,
-    price: Number,
+    description: Number,
   },
 });
 </script>
@@ -39,32 +31,33 @@ p {
 }
 
 .project {
-  $size: 224px;
+  $width: 320px;
+  $height: $width / 1.2;
 
-  width: $size * 2;
-  height: $size;
-  max-height: $size;
+  width: $width;
+  height: $height;
+  max-height: $height;
   position: relative;
-  background: #7e570339;
+  background: #5e575339;
   border-radius: 16px;
-  box-shadow: 0 8px 32px 0 rgba(131, 138, 135, 0.37);
-  backdrop-filter: blur(2px);
+  //box-shadow: 0 8px 32px 0 rgba(131, 138, 135, 0.37);
+  //backdrop-filter: blur(2px);
 
-  @media (min-width: $breakpoint-sm-min) {
-    $size: 288px;
+  /*@media (min-width: $breakpoint-sm-min) {
+    $width: 576px;
 
-    width: $size * 2;
-    height: $size;
-    max-height: $size;
+    width: $width;
+    height: $height;
+    max-height: $height;
   }
 
   @media (min-width: $breakpoint-md-min) {
-    $size: 384px;
+    $width: 768px;
 
-    width: $size * 2;
-    height: $size;
-    max-height: $size;
-  }
+    width: $width;
+    height: $height;
+    max-height: $height;
+  }*/
 }
 
 .img {
@@ -73,7 +66,7 @@ p {
   align-items: center;
 
   img {
-    width: auto;
+    width: 100%;
     max-width: 100%;
     height: 100%;
     vertical-align: bottom;
@@ -82,11 +75,11 @@ p {
 }
 
 .inter {
-  width: auto;
+  width: 100%;
   height: 100%;
 
-  &::v-deep div {
-    width: auto;
+  &:deep(div) {
+    width: 100%;
     height: 100%;
   }
 }

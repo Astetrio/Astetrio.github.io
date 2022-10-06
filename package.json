@@ -35,7 +35,7 @@
     "html-webpack-plugin": "^5.5.0",
     "prerender-spa-plugin-next": "^4.2.3",
     "prettier": "^2.5.1",
-    "puppeteer": "^18.0.5",
+    "puppeteer": "^1.7.0",
     "purgecss-webpack-plugin": "^5.0.0",
     "webpack": "^5.74.0"
   },
