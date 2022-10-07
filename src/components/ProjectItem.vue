@@ -3,7 +3,9 @@
     <div class="col q-mb-lg full-width full-height img">
       <q-intersection once class="inter">
         <!--<q-img :src="thumbnail" :alt="title" width="368px" height="243.5px" />-->
-        <img :src="thumbnail" :alt="title" />
+        <router-link :to="`/project/${guid}`">
+          <img :src="thumbnail" :alt="title" />
+        </router-link>
       </q-intersection>
     </div>
     <h2 class="col-auto">{{ title }}</h2>
@@ -19,6 +21,7 @@ export default defineComponent({
   props: {
     thumbnail: String,
     title: String,
+    guid: String,
     description: Number,
   },
 });

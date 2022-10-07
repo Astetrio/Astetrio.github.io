@@ -18,6 +18,8 @@ const PrerenderSPAPlugin = require('prerender-spa-plugin-next');
 const PuppeteerRenderer = require('./utils/custom-puppeteer-renderer');
 const { PurgeCSSPlugin } = require('purgecss-webpack-plugin');
 
+const devPort = 8080;
+
 module.exports = configure(function (ctx) {
   return {
     // https://v2.quasar.dev/quasar-cli-webpack/supporting-ts
@@ -64,7 +66,7 @@ module.exports = configure(function (ctx) {
       vueLoaderOptions: {
         transformAssetUrls: {
           tags: {
-            "project-item": "thumbnail",
+            'project-item': 'thumbnail',
           },
         },
       },
@@ -129,7 +131,7 @@ module.exports = configure(function (ctx) {
               },
             }),
             postProcess(renderedRoute) {
-              renderedRoute.html = renderedRoute.html.replaceAll('http://localhost:8000', 'https://goldsemi.uz');
+              renderedRoute.html = renderedRoute.html.replaceAll('http://localhost:8000', cfg.mode === 'development' ? `http://localhost:${devPort}` : 'https://astetrio.github.io');
               renderedRoute.html = renderedRoute.html.replaceAll(/(<link href="\/css\/vendor\..+?\.css") rel="stylesheet"(>)/gm, '$1 rel="preload" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"$2');
               renderedRoute.html = renderedRoute.html.replaceAll(/(<script src="\/js\/vendor\..+\.js")(><\/script>)/gm, '$1 defer$2');
 
@@ -149,7 +151,7 @@ module.exports = configure(function (ctx) {
       server: {
         type: 'http',
       },
-      port: 8080,
+      port: devPort,
       open: false, // opens browser window automatically
     },
 

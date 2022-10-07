@@ -2,7 +2,7 @@
   <q-page class="main">
     <section class="column text-black items-center projects">
       <div class="col q-px-lg justify-center container q-gutter-y-lg projects_content">
-        <project-item thumbnail="~assets/crazy-stack.jpg" title="Crazy Stack" />
+        <project-item thumbnail="~assets/crazy-stack.jpg" title="Crazy Stack" guid="aboba" />
         <!--<project-item thumbnail="~assets/crazy-stack.jpg" title="Crazy Stack" />
         <project-item thumbnail="~assets/crazy-stack.jpg" title="Crazy Stack" />
         <project-item thumbnail="~assets/crazy-stack.jpg" title="Crazy Stack" />
