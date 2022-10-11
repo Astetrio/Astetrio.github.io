@@ -2,22 +2,16 @@
   <q-page class="main">
     <section class="column text-black items-center projects">
       <div class="col q-px-lg justify-center container q-gutter-y-lg projects_content">
-        <project-item thumbnail="~assets/crazy-stack.jpg" title="Crazy Stack" guid="aboba" />
-        <!--<project-item thumbnail="~assets/crazy-stack.jpg" title="Crazy Stack" />
-        <project-item thumbnail="~assets/crazy-stack.jpg" title="Crazy Stack" />
-        <project-item thumbnail="~assets/crazy-stack.jpg" title="Crazy Stack" />
-        <project-item thumbnail="~assets/crazy-stack.jpg" title="Crazy Stack" />
-        <project-item thumbnail="~assets/crazy-stack.jpg" title="Crazy Stack" />
-        <project-item thumbnail="~assets/crazy-stack.jpg" title="Crazy Stack" />
-        <project-item thumbnail="~assets/crazy-stack.jpg" title="Crazy Stack" />-->
+        <project-item :key="project.Guid" v-for="project in projects" :project="project" />
       </div>
     </section>
   </q-page>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import ProjectItem from '../components/ProjectItem.vue';
+import { Project } from 'src/interfaces';
 
 export default defineComponent({
   name: 'IndexPage',
@@ -25,6 +19,35 @@ export default defineComponent({
   components: {
     ProjectItem,
   },
+
+  async mounted() {
+    const projects = await this.$api.get('/projects');
+    this.projects = projects.data;
+  },
+
+  /*beforeRouteLeave() {
+    const img = document.createElement('img');
+
+    img.src = this.clickedImageSrc;
+    img.style.position = 'absolute';
+    img.style.top = `${this.clickedImageRect.top}px`;
+    img.style.left = `${this.clickedImageRect.left}px`;
+    img.style.width = `${this.clickedImageRect.width}px`;
+    img.style.height = `${this.clickedImageRect.height}px`;
+
+    this.$root?.$el.appendChild(img);
+
+    setTimeout(() => {
+      img.remove();
+    }, 1000);
+  },*/
+
+  setup() {
+    // {"Id":1,"Guid":"68dfcad1-5624-4929-9fbd-49de3f21b97f","Title":"Crazy Stack","Description":"A very long description","Thumbnail":"images/crazy-stack.jpg"}
+    const projects = ref<Project[]>();
+
+    return { projects };
+  }
 });
 </script>
 
@@ -34,12 +57,12 @@ export default defineComponent({
   padding-bottom: 16px;
 
   &_content {
-    display: flex;
+    display: grid;
     flex-wrap: wrap;
     grid-template-columns: auto;
     column-gap: 64px;
 
-    > .flex {
+    >.flex {
       flex-direction: column;
       row-gap: 32px;
     }
@@ -48,9 +71,9 @@ export default defineComponent({
       grid-template-columns: auto auto;
     }
 
-    @media (min-width: $breakpoint-md-max) {
-      grid-template-columns: auto auto auto;
-    }
+    // @media (min-width: $breakpoint-md-max) {
+    //   grid-template-columns: auto auto auto;
+    // }
   }
 }
 </style>

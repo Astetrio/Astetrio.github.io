@@ -54,11 +54,11 @@
               <text class="logo-text text-yellow" style="mask: url(#masking)" x="0" y="95%">GOLDSEMI</text>
             </svg> -->
 
-            <a class="row items-center justify-start" href="/">
+            <router-link class="row items-center justify-start" to="/">
               <q-img no-spinner class="logo-icon" src="~assets/icon.svg" />
               <h1 class="logo-text text-black">Astetrio</h1>
               <!-- <q-img height="92px" :src="logoImage"></q-img> -->
-            </a>
+            </router-link>
           </q-toolbar-title>
         </q-toolbar>
       </div>
@@ -100,7 +100,16 @@
     </q-header> -->
 
     <q-page-container>
-      <router-view />
+      <div class="relative-position">
+        <router-view v-slot="{ Component }">
+          <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut" appear :duration="300"
+            @before-leave="beforeLeave" @after-leave="afterLeave">
+            <keep-alive>
+              <component :key="$route.fullPath" :is="Component" />
+            </keep-alive>
+          </transition>
+        </router-view>
+      </div>
     </q-page-container>
 
     <q-footer class="row q-py-lg justify-center bg-grey-2 footer">
@@ -140,6 +149,21 @@ export default defineComponent({
 
       localStorage.setItem('locale', this.currentLocaleIndex.toString());
     },
+    beforeLeave(el: HTMLElement) {
+      const { top } = el.getBoundingClientRect();
+      el.style.position = 'fixed';
+      el.style.top = `${top}px`;
+      el.style.left = '0px';
+      el.style.right = '0px';
+      el.style.zIndex = '-1';
+    },
+    afterLeave(el: HTMLElement) {
+      el.style.position = '';
+      el.style.top = '';
+      el.style.left = '';
+      el.style.right = '';
+      el.style.zIndex = '';
+    }
   },
 
   mounted() {
@@ -234,12 +258,18 @@ export default defineComponent({
   height: 64px;
 }
 
+//.fadeIn,
+.fadeOut {
+  position: absolute;
+  //inset: 0%;
+}
+
 .logo {
   //font-family: 'Dela Gothic One'; //, 'New Tegomin', 'Indie Flower', 'Train One', 'Permanent Marker';
 
   line-height: 1;
 
-  & > * {
+  &>* {
     vertical-align: bottom;
   }
 
@@ -277,6 +307,7 @@ export default defineComponent({
 }
 
 .languages {
+
   &:deep(.q-field__marginal),
   &:deep(.q-field__native) {
     color: #ffeb3b;

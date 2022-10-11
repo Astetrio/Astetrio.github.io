@@ -15,10 +15,12 @@
     "deploy": "git subtree split --prefix dist/spa -b gh-pages && git push -f origin gh-pages:main && git branch -D gh-pages"
   },
   "dependencies": {
+    "@maybecode/vue-next-animejs": "^1.0.5",
     "@quasar/extras": "^1.0.0",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "quasar": "^2.6.0",
+    "v-shared-element": "^3.1.0",
     "vue": "^3.0.0",
     "vue-i18n": "^9.2.2",
     "vue-router": "^4.0.0"
