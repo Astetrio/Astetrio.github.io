@@ -102,8 +102,7 @@
     <q-page-container>
       <div class="relative-position">
         <router-view v-slot="{ Component }">
-          <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut" appear :duration="300"
-            @before-leave="beforeLeave" @after-leave="afterLeave">
+          <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut" appear :duration="300" @before-leave="beforeLeave" @after-leave="afterLeave">
             <keep-alive>
               <component :key="$route.fullPath" :is="Component" />
             </keep-alive>
@@ -163,7 +162,7 @@ export default defineComponent({
       el.style.left = '';
       el.style.right = '';
       el.style.zIndex = '';
-    }
+    },
   },
 
   mounted() {
@@ -269,7 +268,7 @@ export default defineComponent({
 
   line-height: 1;
 
-  &>* {
+  & > * {
     vertical-align: bottom;
   }
 
@@ -307,7 +306,6 @@ export default defineComponent({
 }
 
 .languages {
-
   &:deep(.q-field__marginal),
   &:deep(.q-field__native) {
     color: #ffeb3b;

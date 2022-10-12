@@ -6,4 +6,3 @@ import vueNextAnimejs from '@maybecode/vue-next-animejs';
 export default boot(async ({ app }) => {
   app.use(vueNextAnimejs);
 });
-

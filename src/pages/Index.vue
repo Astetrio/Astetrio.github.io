@@ -10,8 +10,8 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import ProjectItem from '../components/ProjectItem.vue';
-import { Project } from 'src/interfaces';
+import ProjectItem from 'src/components/ProjectItem.vue';
+import { projects as projectsArray } from 'src/stores/projects';
 
 export default defineComponent({
   name: 'IndexPage',
@@ -20,10 +20,10 @@ export default defineComponent({
     ProjectItem,
   },
 
-  async mounted() {
+  /*async mounted() {
     const projects = await this.$api.get('/projects');
     this.projects = projects.data;
-  },
+  },*/
 
   /*beforeRouteLeave() {
     const img = document.createElement('img');
@@ -44,10 +44,10 @@ export default defineComponent({
 
   setup() {
     // {"Id":1,"Guid":"68dfcad1-5624-4929-9fbd-49de3f21b97f","Title":"Crazy Stack","Description":"A very long description","Thumbnail":"images/crazy-stack.jpg"}
-    const projects = ref<Project[]>();
+    const projects = ref(projectsArray);
 
     return { projects };
-  }
+  },
 });
 </script>
 
@@ -62,7 +62,7 @@ export default defineComponent({
     grid-template-columns: auto;
     column-gap: 64px;
 
-    >.flex {
+    > .flex {
       flex-direction: column;
       row-gap: 32px;
     }

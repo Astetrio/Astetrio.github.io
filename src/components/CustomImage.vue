@@ -1,8 +1,14 @@
 <template>
   <div class="col q-mb-lg full-width full-height custom-image">
     <div class="inter relative-position">
-      <img :src="src" :alt="alt"
-        v-shared-element:[guid]="{ $keepSharedElementAlive, restrictToRoutes: ['/', `/project/${guid}`] }" />
+      <img
+        :src="src"
+        :alt="alt"
+        v-shared-element:[guid]="{
+          $keepSharedElementAlive,
+          restrictToRoutes: ['/', `/project/${guid}`],
+        }"
+      />
     </div>
   </div>
 </template>
@@ -17,12 +23,10 @@ export default defineComponent({
   props: {
     src: String,
     alt: String,
-    guid: String
+    guid: String,
   },
 
-  mixins: [
-    sharedElementMixin
-  ]
+  mixins: [sharedElementMixin],
 });
 </script>
 

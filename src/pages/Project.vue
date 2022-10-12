@@ -5,7 +5,8 @@
         <div class="preview">
           <custom-image :src="project?.Thumbnail" :alt="project?.Title" :guid="guid" />
         </div>
-        <p>{{ project?.Description }}</p>
+        <!-- <p>{{ project?.Description }}</p> -->
+        <q-markdown class="content" :src="project?.Description.replace('{{SmallDescription}}', project?.SmallDescription)" />
       </div>
     </section>
   </q-page>
@@ -13,14 +14,15 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import CustomImage from '../components/CustomImage.vue';
-import { Project } from 'src/interfaces';
+import CustomImage from 'src/components/CustomImage.vue';
+import { Project } from 'src/components/models';
+import { mappedProjects as projectsDict } from 'src/stores/projects';
 
 export default defineComponent({
   name: 'ProjectPage',
 
   components: {
-    CustomImage
+    CustomImage,
   },
 
   // computed: {
@@ -35,19 +37,20 @@ export default defineComponent({
 
   beforeMount() {
     this.guid = this.$route.params['guid'].toString();
+    this.project = projectsDict.get(this.guid);
   },
 
-  async mounted() {
+  /*async mounted() {
     const project = await this.$api.get(`/projects/${this.$route.params['guid']}`);
     this.project = project.data;
-  },
+  },*/
 
   setup() {
     const project = ref<Project>();
     const guid = ref<string>();
 
     return { project, guid };
-  }
+  },
 });
 </script>
 
@@ -67,5 +70,10 @@ export default defineComponent({
   @media (min-width: $breakpoint-md-max) {
     padding: 0 256px;
   }
+}
+
+//.content:deep(img) {
+.project:deep(img) {
+	border-radius: 8px;
 }
 </style>

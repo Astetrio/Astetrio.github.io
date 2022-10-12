@@ -127,7 +127,9 @@ module.exports = configure(function (ctx) {
 
                 await page.setViewport({ width: 1920, height: 1080 });
                 await page.screenshot({ path: path.join(p, 'preview.png') });
-                await page.screenshot({ path: path.join(__dirname, 'preview.png') });
+                await page.screenshot({
+                  path: path.join(__dirname, 'preview.png'),
+                });
               },
             }),
             postProcess(renderedRoute) {

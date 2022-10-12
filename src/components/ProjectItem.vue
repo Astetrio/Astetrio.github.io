@@ -4,34 +4,29 @@
       <custom-image :src="project.Thumbnail" :alt="project.Title" :guid="project.Guid" />
     </router-link>
     <h3 class="col-auto q-px-lg">{{ project.Title }}</h3>
-    <div class="col-auto q-px-lg q-py-md">{{ project.Description }}</div>
+    <!-- <div class="col-auto q-px-lg q-py-md">{{ project.Description }}</div> -->
+    <q-markdown class="col-auto q-px-lg q-py-md" :src="project.SmallDescription" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref } from 'vue';
+import { defineComponent, PropType } from 'vue';
 import CustomImage from './CustomImage.vue';
-import { Project } from '../interfaces';
+import { Project } from './models';
 
 export default defineComponent({
   name: 'ProjectItem',
 
   components: {
-    CustomImage
+    CustomImage,
   },
 
   props: {
     project: {
       required: true,
-      type: Object as PropType<Project>
-    }
+      type: Object as PropType<Project>,
+    },
   },
-
-  setup() {
-    const image = ref<InstanceType<typeof CustomImage>>();
-
-    return { image };
-  }
 });
 </script>
 

@@ -17,7 +17,7 @@ export default defineComponent({
 #q-app {
   position: relative;
 
-  &>.bg {
+  & > .bg {
     position: absolute;
     width: 100%;
     height: 100%;
