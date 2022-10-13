@@ -102,10 +102,20 @@ module.exports = configure(function (ctx) {
 
         cfg.plugins.push(
           new PurgeCSSPlugin({
-            paths: glob.sync([path.join(__dirname, './src/**/*.vue'), path.join(__dirname, './src/**/*.scss'), path.join(__dirname, './node_modules/quasar/src/**/*.js'), path.join(__dirname, './node_modules/quasar/src/**/*.css')]),
+            paths: glob.sync([
+              path.join(__dirname, './src/**/*.vue'),
+              path.join(__dirname, './src/**/*.scss'),
+              path.join(__dirname, './node_modules/quasar/src/**/*.js'),
+              path.join(__dirname, './node_modules/quasar/src/**/*.css'),
+              // path.join(__dirname, './node_modules/@quasar/**/*.js'),
+              // path.join(__dirname, './node_modules/@quasar/**/*.ts'),
+              // path.join(__dirname, './node_modules/@quasar/**/*.css'),
+              // path.join(__dirname, './node_modules/@quasar/**/*.scss'),
+              // path.join(__dirname, './node_modules/@quasar/**/*.sass'),
+            ]),
             //paths: glob.sync([path.join(__dirname, './dist/**/*.html'), path.join(__dirname, './src/**/*.js'), path.join(__dirname, './src/**/*.css')]),
             safelist: {
-              standard: [/data-v-.*/],
+              standard: [/q-markdown.*/, /data-v-.*/],
             },
           }),
           new PrerenderSPAPlugin({
@@ -123,7 +133,10 @@ module.exports = configure(function (ctx) {
                   fs.mkdirSync(p);
                 }
 
-                fs.copyFileSync(path.join(__dirname, 'README.md'), path.join(p, 'README.md'));
+                fs.copyFileSync(
+                  path.join(__dirname, 'README.md'),
+                  path.join(p, 'README.md'),
+                );
 
                 await page.setViewport({ width: 1920, height: 1080 });
                 await page.screenshot({ path: path.join(p, 'preview.png') });
@@ -133,9 +146,20 @@ module.exports = configure(function (ctx) {
               },
             }),
             postProcess(renderedRoute) {
-              renderedRoute.html = renderedRoute.html.replaceAll('http://localhost:8000', cfg.mode === 'development' ? `http://localhost:${devPort}` : 'https://astetrio.github.io');
-              renderedRoute.html = renderedRoute.html.replaceAll(/(<link href="\/css\/vendor\..+?\.css") rel="stylesheet"(>)/gm, '$1 rel="preload" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"$2');
-              renderedRoute.html = renderedRoute.html.replaceAll(/(<script src="\/js\/vendor\..+\.js")(><\/script>)/gm, '$1 defer$2');
+              renderedRoute.html = renderedRoute.html.replaceAll(
+                'http://localhost:8000',
+                cfg.mode === 'development'
+                  ? `http://localhost:${devPort}`
+                  : 'https://astetrio.github.io',
+              );
+              renderedRoute.html = renderedRoute.html.replaceAll(
+                /(<link href="\/css\/vendor\..+?\.css") rel="stylesheet"(>)/gm,
+                '$1 rel="preload" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"$2',
+              );
+              renderedRoute.html = renderedRoute.html.replaceAll(
+                /(<script src="\/js\/vendor\..+\.js")(><\/script>)/gm,
+                '$1 defer$2',
+              );
 
               if (renderedRoute.route == '/404') {
                 renderedRoute.outputPath = '404.html';

@@ -2,6 +2,7 @@
   "singleQuote": true,
   "trailingComma": "all",
   "semi": true,
-  "printWidth": 1000,
+  "printWidth": 80,
   "endOfLine": "crlf"
 }
+
