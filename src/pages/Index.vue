@@ -5,6 +5,8 @@
         <project-item :key="project.Guid" v-for="project in projects" :project="project" />
       </div>
     </section>
+    <div>{{ $i18n.locale }}</div>
+    <div>{{ $t('success') }}</div>
   </q-page>
 </template>
 
@@ -41,6 +43,15 @@ export default defineComponent({
       img.remove();
     }, 1000);
   },*/
+
+  mounted() {
+		/*if (!this.$root) {
+			return;
+		}
+  
+  	this.$root.$i18n.locale = 'ru-RU';*/
+  	this.$i18n.locale = 'ru-RU';
+  },
 
   setup() {
     // {"Id":1,"Guid":"68dfcad1-5624-4929-9fbd-49de3f21b97f","Title":"Crazy Stack","Description":"A very long description","Thumbnail":"images/crazy-stack.jpg"}

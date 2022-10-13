@@ -11,9 +11,16 @@
 const projects = [
   {
     Guid: '68dfcad1-5624-4929-9fbd-49de3f21b97f',
-    Title: 'Crazy Stack',
-    SmallDescription: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec.',
-    Description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec.\r\n![alt](images/test.jpg)',
+    Title: {
+    	'en-US': 'Crazy Stack'
+    },
+    SmallDescription: {
+    	'en-US': 'Test',
+    	'ru-RU': 'Тест',
+    },
+    Description: {
+    	'en-US': 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec.\r\n![alt](images/test.jpg)',
+    },
     Thumbnail: 'images/crazy-stack.jpg',
   },
   /*{

@@ -2,6 +2,8 @@ import { boot } from 'quasar/wrappers';
 import { createI18n } from 'vue-i18n';
 
 import messages from 'src/i18n';
+import { TranslateableString } from 'src/components/models';
+import Vue from 'vue';
 
 export type MessageLanguages = keyof typeof messages;
 // Type-define 'en-US' as the master schema for the resource
@@ -30,4 +32,31 @@ export default boot(({ app }) => {
 
   // Set i18n instance on app
   app.use(i18n);
+
+  app.config.globalProperties.$mt = function(this: any, str: TranslateableString) {
+		let current = this as any;
+		while (!current.$i18n.locale && current.$parent)
+		{
+			current = current.$parent;
+		}
+
+		const locale = current.$i18n.locale ?? (i18n.global.locale as any).value?.toString();
+
+		if (locale === undefined)
+		{
+			return 'ХУЙ';
+		}
+
+		if (locale in str)
+		{
+			return str[locale];
+		}
+
+		if ('en-US' in str)
+		{
+			return str['en-US'];
+		}
+  
+  	return 'Can\'t translate';
+  };
 });
