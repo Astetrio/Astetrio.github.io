@@ -12,14 +12,20 @@ const projects = [
   {
     Guid: '68dfcad1-5624-4929-9fbd-49de3f21b97f',
     Title: {
-    	'en-US': 'Crazy Stack'
+      'en-US': 'Crazy Stack',
     },
     SmallDescription: {
-    	'en-US': 'Test',
-    	'ru-RU': 'Тест',
+      'en-US': '# Crazy Stack\nStacking mechanics to quickly bring your hyper-casual games to life',
     },
     Description: {
-    	'en-US': 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec.\r\n![alt](images/test.jpg)',
+      'en-US': `
+Use this incredible pack to make games with stack mechanics quickly and easily
+
++ Make different factories and food stands 🏭
++ Make runners with a stickman carrying pallets of eggs 🥚
++ Do whatever you want with your imagination!!! 🤩
+
+If something went wrong or you want to suggest some idea, you can write to me astetrio.dev.supp@gmail.com`,
     },
     Thumbnail: 'images/crazy-stack.jpg',
   },

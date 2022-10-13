@@ -1,21 +1,17 @@
 <template>
   <div class="col q-mb-lg full-width full-height custom-image">
     <div class="inter relative-position">
-      <img
-        :src="src"
-        :alt="alt"
-        v-shared-element:[guid]="{
-          $keepSharedElementAlive,
-          restrictToRoutes: ['/', `/project/${guid}`],
-        }"
-      />
+      <img :src="src" :alt="alt" v-shared-element:[guid]="{
+        // $keepSharedElementAlive,
+        restrictToRoutes: ['/', `/project/${guid}`],
+      }" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { sharedElementMixin } from 'v-shared-element';
+//import { sharedElementMixin } from 'v-shared-element';
 
 export default defineComponent({
   name: 'CustomImage',
@@ -26,7 +22,7 @@ export default defineComponent({
     guid: String,
   },
 
-  mixins: [sharedElementMixin],
+  //mixins: [sharedElementMixin],
 });
 </script>
 

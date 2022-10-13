@@ -6,7 +6,8 @@
           <custom-image :src="project?.Thumbnail" :alt="$mt(project?.Title)" :guid="guid" />
         </div>
         <!-- <p>{{ project?.Description }}</p> -->
-        <q-markdown class="content" :src="$mt(project?.Description).replace('{{SmallDescription}}', $mt(project?.SmallDescription))" />
+        <q-markdown class="content"
+          :src="$mt(project?.Description).replace('{{SmallDescription}}', $mt(project?.SmallDescription))" />
       </div>
     </section>
   </q-page>
@@ -55,6 +56,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.project:deep(img) {
+  border-radius: 8px;
+}
+
 .preview {
   position: relative;
   padding: 0;
@@ -72,8 +77,19 @@ export default defineComponent({
   }
 }
 
-//.content:deep(img) {
-.project:deep(img) {
-	border-radius: 8px;
+.content {
+  padding: 0;
+
+  &:deep(a)::after {
+    content: none;
+  }
+
+  @media (min-width: $breakpoint-sm-max) {
+    padding: 0 128px;
+  }
+
+  @media (min-width: $breakpoint-md-max) {
+    padding: 0 256px;
+  }
 }
 </style>

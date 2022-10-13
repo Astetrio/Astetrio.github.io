@@ -3,7 +3,6 @@ import { createI18n } from 'vue-i18n';
 
 import messages from 'src/i18n';
 import { TranslateableString } from 'src/components/models';
-import Vue from 'vue';
 
 export type MessageLanguages = keyof typeof messages;
 // Type-define 'en-US' as the master schema for the resource
@@ -23,6 +22,12 @@ declare module 'vue-i18n' {
 }
 /* eslint-enable @typescript-eslint/no-empty-interface */
 
+declare module '@vue/runtime-core' {
+  interface ComponentCustomProperties {
+    $mt: (str?: TranslateableString) => string;
+  }
+}
+
 export default boot(({ app }) => {
   const i18n = createI18n<{ message: MessageSchema }, MessageLanguages>({
     locale: 'en-US',
@@ -33,30 +38,26 @@ export default boot(({ app }) => {
   // Set i18n instance on app
   app.use(i18n);
 
-  app.config.globalProperties.$mt = function(this: any, str: TranslateableString) {
-		let current = this as any;
-		while (!current.$i18n.locale && current.$parent)
-		{
-			current = current.$parent;
-		}
+  app.config.globalProperties.$mt = function (this: any, str?: TranslateableString) {
+    if (!str) {
+      return "Can't translate";
+    }
 
-		const locale = current.$i18n.locale ?? (i18n.global.locale as any).value?.toString();
+    let current = this as any;
+    while (!current.$i18n.locale && current.$parent) {
+      current = current.$parent;
+    }
 
-		if (locale === undefined)
-		{
-			return 'ХУЙ';
-		}
+    const locale = current.$i18n.locale ?? (i18n.global.locale as any).value?.toString();
 
-		if (locale in str)
-		{
-			return str[locale];
-		}
+    if (locale in str) {
+      return str[locale];
+    }
 
-		if ('en-US' in str)
-		{
-			return str['en-US'];
-		}
-  
-  	return 'Can\'t translate';
+    if ('en-US' in str) {
+      return str['en-US'];
+    }
+
+    return "Can't translate";
   };
 });

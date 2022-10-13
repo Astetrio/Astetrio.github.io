@@ -3,9 +3,10 @@
     <router-link class="link" :to="`/project/${project.Guid}`">
       <custom-image :src="project.Thumbnail" :alt="$mt(project.Title)" :guid="project.Guid" />
     </router-link>
-    <h3 class="col-auto q-px-lg">{{ $mt(project.Title) }}</h3>
+    <!-- <h3 class="col-auto q-px-lg">{{ $mt(project.Title) }}</h3> -->
     <!-- <div class="col-auto q-px-lg q-py-md">{{ project.Description }}</div> -->
-    <q-markdown class="col-auto q-px-lg q-py-md" :src="$mt(project.SmallDescription)" />
+    <!-- <q-markdown no-heading-anchor-links class="col-auto q-px-lg q-py-md" :src="$mt(project.SmallDescription)" /> -->
+    <q-markdown no-heading-anchor-links class="col-auto q-px-lg q-pb-md" :src="$mt(project.SmallDescription)" />
   </div>
 </template>
 
@@ -26,7 +27,7 @@ export default defineComponent({
       required: true,
       type: Object as PropType<Project>,
     },
-  },
+  }
 });
 </script>
 
@@ -37,15 +38,18 @@ p {
 }
 
 .project {
+  //$width: 100%;
   $width: 400px;
   //$height: $width / 1.2;
 
+  width: inherit;
   max-width: $width;
   //height: $height;
   //max-height: $height;
   position: relative;
   background: #5e575339;
   border-radius: 16px;
+  overflow-wrap: break-word;
   //box-shadow: 0 8px 32px 0 rgba(131, 138, 135, 0.37);
   //backdrop-filter: blur(2px);
 
@@ -57,6 +61,10 @@ p {
     &:deep(img) {
       border-radius: 16px 16px 0 0;
     }
+  }
+
+  >* {
+    width: 100%;
   }
 
   /*@media (min-width: $breakpoint-sm-min) {
