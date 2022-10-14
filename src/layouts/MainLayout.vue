@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hHh Lpr lff">
+  <q-layout view="hHh Lpr lff" style="min-height: 100vh;">
     <q-header class="q-py-md row justify-center bg-grey-2 header">
       <div class="container">
         <q-toolbar class="justify-center">
