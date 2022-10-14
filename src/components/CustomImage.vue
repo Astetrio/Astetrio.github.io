@@ -1,7 +1,7 @@
 <template>
   <div class="col q-mb-lg full-width full-height custom-image">
     <div class="inter relative-position">
-      <img :src="src" :alt="alt" v-shared-element:[guid]="{
+      <img :src="src" :alt="alt" v-shared-element:[`preview-${guid}`]="{
         // $keepSharedElementAlive,
         restrictToRoutes: ['/', `/project/${guid}`],
       }" />

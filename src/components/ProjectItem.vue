@@ -1,7 +1,7 @@
 <template>
   <div class="column overflow-hidden justify-between project">
     <router-link class="link" :to="`/project/${project.Guid}`">
-      <custom-image :src="project.Thumbnail" :alt="$mt(project.Title)" :guid="project.Guid" />
+      <custom-image :src="project.Thumbnail" :alt="project.Guid" :guid="project.Guid" />
     </router-link>
     <!-- <h3 class="col-auto q-px-lg">{{ $mt(project.Title) }}</h3> -->
     <!-- <div class="col-auto q-px-lg q-py-md">{{ project.Description }}</div> -->
@@ -65,6 +65,10 @@ p {
 
   >* {
     width: 100%;
+  }
+
+  &:deep(img) {
+    border-radius: 8px;
   }
 
   /*@media (min-width: $breakpoint-sm-min) {

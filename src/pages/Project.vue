@@ -3,7 +3,7 @@
     <section class="column text-black items-center">
       <div class="col q-px-lg justify-center container relative-position">
         <div class="preview">
-          <custom-image :src="project?.Thumbnail" :alt="$mt(project?.Title)" :guid="guid" />
+          <custom-image :src="project?.Thumbnail" :alt="project?.Guid" :guid="guid" />
         </div>
         <!-- <p>{{ project?.Description }}</p> -->
         <q-markdown class="content"

@@ -1,8 +1,10 @@
 <template>
   <q-page class="main">
     <section class="column text-black items-center projects">
-      <div class="col q-px-lg justify-center container q-gutter-y-lg projects_content">
-        <project-item :key="project.Guid" v-for="project in projects" :project="project" />
+      <!-- <div class="col q-px-lg justify-center container q-gutter-y-lg projects_content"> -->
+      <div class="col q-px-lg justify-center container projects_content"
+        :style="{ 'column-count': projects.length < 3 ? projects.length : undefined }">
+        <project-item class="q-mb-lg q-mx-auto" :key="project.Guid" v-for="project in projects" :project="project" />
       </div>
     </section>
   </q-page>
@@ -57,10 +59,11 @@ export default defineComponent({
   padding-bottom: 16px;
 
   &_content {
-    display: grid;
-    flex-wrap: wrap;
-    grid-template-columns: auto;
-    column-gap: 64px;
+    // display: grid;
+    // flex-wrap: wrap;
+    // grid-template-columns: auto;
+    // column-gap: 64px;
+    column-count: 1;
 
     >.flex {
       flex-direction: column;
@@ -68,12 +71,14 @@ export default defineComponent({
     }
 
     @media (min-width: $breakpoint-sm-max) {
-      grid-template-columns: auto auto;
+      // grid-template-columns: auto auto;
+      column-count: 2;
     }
 
-    // @media (min-width: $breakpoint-md-max) {
-    //   grid-template-columns: auto auto auto;
-    // }
+    @media (min-width: $breakpoint-md-max) {
+      // grid-template-columns: auto auto auto;
+      column-count: 3;
+    }
   }
 }
 </style>
