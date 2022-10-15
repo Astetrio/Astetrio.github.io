@@ -14,9 +14,13 @@ const { configure } = require('quasar/wrappers');
 const path = require('path');
 const fs = require('fs');
 const glob = require('glob-all');
+
 const PrerenderSPAPlugin = require('prerender-spa-plugin-next');
 const PuppeteerRenderer = require('./utils/custom-puppeteer-renderer');
 const { PurgeCSSPlugin } = require('purgecss-webpack-plugin');
+//const CopyPlugin = require('copy-webpack-plugin');
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
+const PostProcessingPlugin = require('post-processing-webpack-plugin');
 
 const devPort = 8080;
 
@@ -100,7 +104,61 @@ module.exports = configure(function (ctx) {
           });
         }*/
 
+        cfg.module.rules.push({
+          test: /images\/.+\.(jpe?g|png)$/i,
+          type: 'asset',
+        });
+
+        if (!cfg.optimization.minimizer) {
+          cfg.optimization.minimizer = [];
+        }
+
+        cfg.optimization.minimizer.push(
+          new ImageMinimizerPlugin({
+            minimizer: {
+              implementation: ImageMinimizerPlugin.sharpMinify,
+            },
+            generator: [
+              {
+                type: 'asset',
+                implementation: ImageMinimizerPlugin.sharpGenerate,
+                options: {
+                  encodeOptions: {
+                    webp: {
+                      quality: 90,
+                    },
+                  },
+                },
+              },
+              {
+                preset: 'webp',
+                implementation: ImageMinimizerPlugin.sharpGenerate,
+                options: {
+                  encodeOptions: {
+                    webp: {
+                      quality: 90,
+                    },
+                  },
+                },
+              },
+            ],
+          }),
+        );
+
+        class ArbitraryCodeAfterReload {
+          constructor(cb) {
+            this.apply = function (compiler) {
+              if (compiler.hooks && compiler.hooks.done) {
+                compiler.hooks.done.tap('webpack-arbitrary-code', cb);
+              }
+            };
+          }
+        }
+
         cfg.plugins.push(
+          // new CopyPlugin({
+          //   patterns: ['images/**/*.png', 'images/**/*.jpg'],
+          // }),
           new PurgeCSSPlugin({
             paths: glob.sync([
               path.join(__dirname, './src/**/*.vue'),
@@ -167,6 +225,32 @@ module.exports = configure(function (ctx) {
 
               return renderedRoute;
             },
+          }),
+          new PostProcessingPlugin({
+            process(original, current, filename) {
+              const result = original.replaceAll(
+                /images\/(.+)\.(jpe?g|png)/gi,
+                'images/$1.webp',
+              );
+
+              return result;
+            },
+          }),
+          new ArbitraryCodeAfterReload(() => {
+            const root = path.join(__dirname, 'dist', 'spa');
+
+            const files = require('glob-all').sync([
+              path.join(root, 'images/**/*.png'),
+              path.join(root, 'images/**/*.jpg'),
+              path.join(root, 'images/**/*.jpeg'),
+              path.join(root, 'icons/**/*.webp'),
+            ]);
+
+            //console.log('Files: ');
+            //console.log(files);
+            for (const file of files) {
+              fs.unlinkSync(file);
+            }
           }),
         );
       },

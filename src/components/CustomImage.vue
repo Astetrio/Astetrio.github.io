@@ -1,7 +1,7 @@
 <template>
-  <div class="col q-mb-lg full-width full-height custom-image">
+  <div class="col full-width full-height custom-image">
     <div class="inter relative-position">
-      <img :src="src" :alt="alt" v-shared-element:[`preview-${guid}`]="{
+      <img ref="img" :src="src" :alt="alt" v-shared-element:[`preview-${guid}`]="{
         // $keepSharedElementAlive,
         restrictToRoutes: ['/', `/project/${guid}`],
       }" />
@@ -23,6 +23,31 @@ export default defineComponent({
   },
 
   //mixins: [sharedElementMixin],
+
+  // methods: {
+  //   onImageLoaded() {
+  //     if (!this.img) {
+  //       return;
+  //     }
+
+  //     this.interStyle = { 'padding-top': `${this.img.naturalHeight / this.img.naturalWidth * this.img.width}px` };
+  //   }
+  // },
+
+  // mounted() {
+  //   if (!this.img) {
+  //     return;
+  //   }
+
+  //   this.img.onload = this.onImageLoaded;
+  // },
+
+  // setup() {
+  //   const img = ref<HTMLImageElement>();
+  //   const interStyle = ref<StyleValue>();
+
+  //   return { img, interStyle };
+  // }
 });
 </script>
 
@@ -33,16 +58,16 @@ export default defineComponent({
   align-items: center;
 
   .inter {
-    padding-top: 66%;
+    //padding-top: 66%;
     width: 100%;
   }
 
   img {
-    position: absolute;
-    inset: 0%;
+    //position: absolute;
+    //inset: 0%;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    //object-fit: fill;
   }
 }
 </style>
