@@ -227,32 +227,47 @@ module.exports = configure(function (ctx) {
             },
           }),
           new PostProcessingPlugin({
-            process(original, current, filename) {
-              const result = original.replaceAll(
-                /images\/(.+)\.(jpe?g|png)/gi,
-                'images/$1.webp',
+            process(content) {
+              const result = content.replaceAll(
+                /\/public\/images/gi,
+                '/images',
               );
 
               return result;
             },
           }),
-          new ArbitraryCodeAfterReload(() => {
-            const root = path.join(__dirname, 'dist', 'spa');
-
-            const files = require('glob-all').sync([
-              path.join(root, 'images/**/*.png'),
-              path.join(root, 'images/**/*.jpg'),
-              path.join(root, 'images/**/*.jpeg'),
-              path.join(root, 'icons/**/*.webp'),
-            ]);
-
-            //console.log('Files: ');
-            //console.log(files);
-            for (const file of files) {
-              fs.unlinkSync(file);
-            }
-          }),
         );
+
+        if (cfg.mode !== 'development') {
+          cfg.plugins.push(
+            new PostProcessingPlugin({
+              process(content) {
+                const result = content.replaceAll(
+                  /images\/(.+)\.(jpe?g|png)/gi,
+                  'images/$1.webp',
+                );
+
+                return result;
+              },
+            }),
+            new ArbitraryCodeAfterReload(() => {
+              const root = path.join(__dirname, 'dist', 'spa');
+
+              const files = require('glob-all').sync([
+                path.join(root, 'images/**/*.png'),
+                path.join(root, 'images/**/*.jpg'),
+                path.join(root, 'images/**/*.jpeg'),
+                path.join(root, 'icons/**/*.webp'),
+              ]);
+
+              //console.log('Files: ');
+              //console.log(files);
+              for (const file of files) {
+                fs.unlinkSync(file);
+              }
+            }),
+          );
+        }
       },
     },
 
