@@ -7,8 +7,14 @@ const waitForRender = function (options) {
   return new Promise((resolve, reject) => {
     // Render when an event fires on the document.
     if (options.renderAfterDocumentEvent) {
-      if (window['__PRERENDER_STATUS'] && window['__PRERENDER_STATUS'].__DOCUMENT_EVENT_RESOLVED) resolve();
-      document.addEventListener(options.renderAfterDocumentEvent, () => resolve());
+      if (
+        window['__PRERENDER_STATUS'] &&
+        window['__PRERENDER_STATUS'].__DOCUMENT_EVENT_RESOLVED
+      )
+        resolve();
+      document.addEventListener(options.renderAfterDocumentEvent, () =>
+        resolve(),
+      );
 
       // Render after a certain number of milliseconds.
     } else if (options.renderAfterTime) {
@@ -26,7 +32,8 @@ class PuppeteerRenderer {
     this._puppeteer = null;
     this._rendererOptions = rendererOptions || {};
 
-    if (this._rendererOptions.maxConcurrentRoutes == null) this._rendererOptions.maxConcurrentRoutes = 0;
+    if (this._rendererOptions.maxConcurrentRoutes == null)
+      this._rendererOptions.maxConcurrentRoutes = 0;
 
     if (this._rendererOptions.inject && !this._rendererOptions.injectProperty) {
       this._rendererOptions.injectProperty = '__PRERENDER_INJECTED';
@@ -48,7 +55,9 @@ class PuppeteerRenderer {
       this._puppeteer = await puppeteer.launch(this._rendererOptions);
     } catch (e) {
       console.error(e);
-      console.error('[Prerenderer - PuppeteerRenderer] Unable to start Puppeteer');
+      console.error(
+        '[Prerenderer - PuppeteerRenderer] Unable to start Puppeteer',
+      );
       // Re-throw the error so it can be handled further up the chain. Good idea or not?
       throw e;
     }
@@ -84,11 +93,17 @@ class PuppeteerRenderer {
           const page = await this._puppeteer.newPage();
 
           if (options.consoleHandler) {
-            page.on('console', (message) => options.consoleHandler(route, message));
+            page.on('console', (message) =>
+              options.consoleHandler(route, message),
+            );
           }
 
           if (options.inject) {
-            await page.evaluateOnNewDocument(`(function () { window['${options.injectProperty}'] = ${JSON.stringify(options.inject)}; })();`);
+            await page.evaluateOnNewDocument(
+              `(function () { window['${
+                options.injectProperty
+              }'] = ${JSON.stringify(options.inject)}; })();`,
+            );
           }
 
           const baseURL = `http://localhost:${rootOptions.server.port}`;
@@ -102,18 +117,26 @@ class PuppeteerRenderer {
           if (options.renderAfterDocumentEvent) {
             page.evaluateOnNewDocument(function (options) {
               window['__PRERENDER_STATUS'] = {};
-              document.addEventListener(options.renderAfterDocumentEvent, () => {
-                window['__PRERENDER_STATUS'].__DOCUMENT_EVENT_RESOLVED = true;
-              });
+              document.addEventListener(
+                options.renderAfterDocumentEvent,
+                () => {
+                  window['__PRERENDER_STATUS'].__DOCUMENT_EVENT_RESOLVED = true;
+                },
+              );
             }, this._rendererOptions);
           }
 
-          const navigationOptions = options.navigationOptions ? { waituntil: 'networkidle0', ...options.navigationOptions } : { waituntil: 'networkidle0' };
+          const navigationOptions = options.navigationOptions
+            ? { waituntil: 'networkidle0', ...options.navigationOptions }
+            : { waituntil: 'networkidle0' };
           await page.goto(`${baseURL}${route}`, navigationOptions);
 
           // Wait for some specific element exists
           const { renderAfterElementExists } = this._rendererOptions;
-          if (renderAfterElementExists && typeof renderAfterElementExists === 'string') {
+          if (
+            renderAfterElementExists &&
+            typeof renderAfterElementExists === 'string'
+          ) {
             await page.waitForSelector(renderAfterElementExists);
           }
           // Once this completes, it's safe to capture the page contents.

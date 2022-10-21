@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hHh Lpr lff" style="min-height: 100vh;">
+  <q-layout view="hHh Lpr lff" style="min-height: 100vh">
     <q-header class="q-py-md row justify-center bg-grey-2 header">
       <div class="container">
         <q-toolbar class="justify-center">
@@ -102,8 +102,14 @@
     <q-page-container>
       <div class="relative-position">
         <router-view v-slot="{ Component }">
-          <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut" appear :duration="300"
-            @before-leave="beforeLeave" @after-leave="afterLeave">
+          <transition
+            enter-active-class="animated fadeIn"
+            leave-active-class="animated fadeOut"
+            appear
+            :duration="300"
+            @before-leave="beforeLeave"
+            @after-leave="afterLeave"
+          >
             <!-- <keep-alive> -->
             <component :key="$route.fullPath" :is="Component" />
             <!-- </keep-alive> -->
@@ -118,7 +124,9 @@
           <!-- <h4 class="q-px-xl text-center afterline full-width">{{ $i18n.t('contacts') }}</h4> -->
           <div>
             <div class="column contacts">
-              <a class="text-black" href="mailto:astetrio.dev.supp@gmail.com">astetrio.dev.supp@gmail.com</a>
+              <a class="text-black" href="mailto:astetrio.dev.supp@gmail.com"
+                >astetrio.dev.supp@gmail.com</a
+              >
               <!-- <a href="tg://resolve?domain=kley_goldsemi">@kley_goldsemi</a> -->
             </div>
           </div>
@@ -172,7 +180,9 @@ export default defineComponent({
     //this.$q.addressbarColor.set('#e2e35a');
 
     if (storedLocale === null) {
-      this.currentLocaleIndex = this.$i18n.availableLocales.findIndex((x) => x === 'uz');
+      this.currentLocaleIndex = this.$i18n.availableLocales.findIndex(
+        (x) => x === 'uz',
+      );
     } else {
       this.currentLocaleIndex = Number(storedLocale);
     }
@@ -269,7 +279,7 @@ export default defineComponent({
 
   line-height: 1;
 
-  &>* {
+  & > * {
     vertical-align: bottom;
   }
 
@@ -307,7 +317,6 @@ export default defineComponent({
 }
 
 .languages {
-
   &:deep(.q-field__marginal),
   &:deep(.q-field__native) {
     color: #ffeb3b;

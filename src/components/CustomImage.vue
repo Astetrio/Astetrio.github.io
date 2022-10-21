@@ -1,10 +1,15 @@
 <template>
   <div class="col full-width full-height custom-image">
     <div class="inter relative-position">
-      <img ref="img" :src="src" :alt="alt" v-shared-element:[`preview-${guid}`]="{
-        // $keepSharedElementAlive,
-        restrictToRoutes: ['/', `/project/${guid}`],
-      }" />
+      <img
+        ref="img"
+        :src="src"
+        :alt="alt"
+        v-shared-element:[`preview-${guid}`]="{
+          // $keepSharedElementAlive,
+          restrictToRoutes: ['/', `/project/${guid}`],
+        }"
+      />
     </div>
   </div>
 </template>

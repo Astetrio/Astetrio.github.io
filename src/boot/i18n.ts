@@ -38,7 +38,10 @@ export default boot(({ app }) => {
   // Set i18n instance on app
   app.use(i18n);
 
-  app.config.globalProperties.$mt = function (this: any, str?: TranslateableString) {
+  app.config.globalProperties.$mt = function (
+    this: any,
+    str?: TranslateableString,
+  ) {
     if (!str) {
       return "Can't translate";
     }
@@ -48,7 +51,8 @@ export default boot(({ app }) => {
       current = current.$parent;
     }
 
-    const locale = current.$i18n.locale ?? (i18n.global.locale as any).value?.toString();
+    const locale =
+      current.$i18n.locale ?? (i18n.global.locale as any).value?.toString();
 
     if (locale in str) {
       return str[locale];

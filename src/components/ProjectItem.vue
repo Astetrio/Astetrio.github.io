@@ -1,12 +1,20 @@
 <template>
   <div class="column overflow-hidden justify-between project">
     <router-link class="link" :to="`/project/${project.Guid}`">
-      <custom-image :src="project.Thumbnail" :alt="project.Guid" :guid="project.Guid" />
+      <custom-image
+        :src="project.Thumbnail"
+        :alt="project.Guid"
+        :guid="project.Guid"
+      />
     </router-link>
     <!-- <h3 class="col-auto q-px-lg">{{ $mt(project.Title) }}</h3> -->
     <!-- <div class="col-auto q-px-lg q-py-md">{{ project.Description }}</div> -->
     <!-- <q-markdown no-heading-anchor-links class="col-auto q-px-lg q-py-md" :src="$mt(project.SmallDescription)" /> -->
-    <q-markdown no-heading-anchor-links class="col-auto q-px-lg q-pb-md" :src="$mt(project.SmallDescription)" />
+    <q-markdown
+      no-heading-anchor-links
+      class="col-auto q-px-lg q-pb-md"
+      :src="$mt(project.SmallDescription)"
+    />
   </div>
 </template>
 
@@ -27,7 +35,7 @@ export default defineComponent({
       required: true,
       type: Object as PropType<Project>,
     },
-  }
+  },
 });
 </script>
 
@@ -63,7 +71,7 @@ p {
     }
   }
 
-  >* {
+  > * {
     width: 100%;
   }
 

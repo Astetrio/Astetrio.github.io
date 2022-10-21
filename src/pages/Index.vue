@@ -2,9 +2,18 @@
   <q-page class="main">
     <section class="column text-black items-center projects">
       <!-- <div class="col q-px-lg justify-center container q-gutter-y-lg projects_content"> -->
-      <div class="col q-px-lg justify-center container projects_content"
-        :style="{ 'column-count': projects.length < 3 ? projects.length : undefined }">
-        <project-item class="q-mb-lg q-mx-auto" :key="project.Guid" v-for="project in projects" :project="project" />
+      <div
+        class="col q-px-lg justify-center container projects_content"
+        :style="{
+          'column-count': projects.length < 3 ? projects.length : undefined,
+        }"
+      >
+        <project-item
+          class="q-mb-lg q-mx-auto"
+          :key="project.Guid"
+          v-for="project in projects"
+          :project="project"
+        />
       </div>
     </section>
   </q-page>
@@ -65,7 +74,7 @@ export default defineComponent({
     // column-gap: 64px;
     column-count: 1;
 
-    >.flex {
+    > .flex {
       flex-direction: column;
       row-gap: 32px;
     }
