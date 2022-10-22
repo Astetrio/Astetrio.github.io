@@ -53,7 +53,7 @@ function plugin(md: MarkdownIt, options: Options) {
     const padding = parseInt(temp);
     const nums = padding.toString().length;
     if (padding !== NaN && temp.charCodeAt(nums) !== 0x5B/* [ */) { return false; }
-		console.log(padding);
+		// console.log(padding);
 
     labelStart = state.pos + 2 + nums;
     labelEnd = state.md.helpers.parseLinkLabel(state, state.pos + 1 + nums, false);
