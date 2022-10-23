@@ -92,8 +92,9 @@ export default defineComponent({
   padding: 0;
 
   /*&:deep(img) {
-    margin-left: 20%;
-    width: 60%;
+    //margin-left: 20%;
+    //width: 60%;
+    vertical-align: bottom;
   }*/
 
   &:deep(a)::after {

@@ -52,8 +52,12 @@ function plugin(md: MarkdownIt, options: Options) {
     }
 
 		const src = state.src.substring(state.pos);
-		const eol = src.indexOf('\n');
+		let eol = src.indexOf('\n');
 
+		if (eol < 0) {
+			eol = src.length;
+		}
+    
 		const content = src.substring(2, eol);
 
 		const tokens = [];
@@ -64,12 +68,12 @@ function plugin(md: MarkdownIt, options: Options) {
 		      tokens
 		);
 
-		const token = state.push('align', 'div', 0);
-		token.attrs = [ [ 'align', 'center' ] ];
-		token.children = tokens;
-		token.content = content;
-
-		//console.log(tokens);
+		if (!silent) {
+			const token = state.push('align', 'div', 0);
+			token.attrs = [ [ 'align', 'center' ] ];
+			token.children = tokens;
+			token.content = content;
+		}
   
     state.pos += eol + 1;
     state.posMax += eol + 1;
