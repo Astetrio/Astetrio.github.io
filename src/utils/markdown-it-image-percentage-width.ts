@@ -30,52 +30,76 @@ function plugin(md: MarkdownIt, options: Options) {
     return defaultRender?.(tokens, idx, options, env, self) ?? '';
   };*/
 
-  return function(state: StateInline, silent: boolean) {
+  return function (state: StateInline, silent: boolean) {
     var attrs,
-        code,
-        content,
-        label,
-        labelEnd,
-        labelStart,
-        pos,
-        ref,
-        res,
-        title,
-        token,
-        tokens,
-        start,
-        href = '',
-        oldPos = state.pos,
-        max = state.posMax;
+      code,
+      content,
+      label,
+      labelEnd,
+      labelStart,
+      pos,
+      ref,
+      res,
+      title,
+      token,
+      tokens,
+      start,
+      href = '',
+      oldPos = state.pos,
+      max = state.posMax;
 
-    if (state.src.charCodeAt(state.pos) !== 0x21/* ! */) { return false; }
-    const temp = state.src.substring(state.pos + 1, state.pos + 5);
+    if (state.src.charCodeAt(state.pos) !== 0x21 /* ! */) {
+      return false;
+    }
+    const align =
+      state.src.charCodeAt(state.pos + 1) === 0x3e
+        ? 'right'
+        : state.src.charCodeAt(state.pos + 1) === 0x3c
+        ? 'left'
+        : 'center';
+    const offset = isNaN(parseInt(state.src[state.pos + 1])) ? 2 : 1;
+    const temp = state.src.substring(
+      state.pos + offset,
+      state.pos + offset + 4,
+    );
     const padding = parseInt(temp);
     const nums = padding.toString().length;
-    if (padding !== NaN && temp.charCodeAt(nums) !== 0x5B/* [ */) { return false; }
-		// console.log(padding);
+    if (padding !== NaN && temp.charCodeAt(nums) !== 0x5b /* [ */) {
+      return false;
+    }
+    // console.log(padding);
 
-    labelStart = state.pos + 2 + nums;
-    labelEnd = state.md.helpers.parseLinkLabel(state, state.pos + 1 + nums, false);
-  
+    labelStart = state.pos + offset + nums + 1;
+    labelEnd = state.md.helpers.parseLinkLabel(
+      state,
+      state.pos + offset + nums,
+      false,
+    );
+
     // parser failed to find ']', so it's not a valid link
-    if (labelEnd < 0) { return false; }
-  
+    if (labelEnd < 0) {
+      return false;
+    }
+
     pos = labelEnd + 1;
-    if (pos < max && state.src.charCodeAt(pos) === 0x28/* ( */) {
+    if (pos < max && state.src.charCodeAt(pos) === 0x28 /* ( */) {
       //
       // Inline link
       //
-  
+
       // [link](  <href>  "title"  )
       //        ^^ skipping these spaces
       pos++;
       for (; pos < max; pos++) {
         code = state.src.charCodeAt(pos);
-        if (!isSpace(code) && code !== 0x0A) { break; }
+        if (!isSpace(code) && code !== 0x0a) {
+          break;
+        }
       }
-      if (pos >= max) { return false; }
-  
+      if (pos >= max) {
+        return false;
+      }
+
       // [link](  <href>  "title"  )
       //          ^^^^^^ parsing link destination
       start = pos;
@@ -88,33 +112,37 @@ function plugin(md: MarkdownIt, options: Options) {
           href = '';
         }
       }
-  
+
       // [link](  <href>  "title"  )
       //                ^^ skipping these spaces
       start = pos;
       for (; pos < max; pos++) {
         code = state.src.charCodeAt(pos);
-        if (!isSpace(code) && code !== 0x0A) { break; }
+        if (!isSpace(code) && code !== 0x0a) {
+          break;
+        }
       }
-  
+
       // [link](  <href>  "title"  )
       //                  ^^^^^^^ parsing link title
       res = state.md.helpers.parseLinkTitle(state.src, pos, state.posMax);
       if (pos < max && start !== pos && res.ok) {
         title = res.str;
         pos = res.pos;
-  
+
         // [link](  <href>  "title"  )
         //                         ^^ skipping these spaces
         for (; pos < max; pos++) {
           code = state.src.charCodeAt(pos);
-          if (!isSpace(code) && code !== 0x0A) { break; }
+          if (!isSpace(code) && code !== 0x0a) {
+            break;
+          }
         }
       } else {
         title = '';
       }
-  
-      if (pos >= max || state.src.charCodeAt(pos) !== 0x29/* ) */) {
+
+      if (pos >= max || state.src.charCodeAt(pos) !== 0x29 /* ) */) {
         state.pos = oldPos;
         return false;
       }
@@ -123,9 +151,11 @@ function plugin(md: MarkdownIt, options: Options) {
       //
       // Link reference
       //
-      if (typeof state.env.references === 'undefined') { return false; }
-  
-      if (pos < max && state.src.charCodeAt(pos) === 0x5B/* [ */) {
+      if (typeof state.env.references === 'undefined') {
+        return false;
+      }
+
+      if (pos < max && state.src.charCodeAt(pos) === 0x5b /* [ */) {
         start = pos + 1;
         pos = state.md.helpers.parseLinkLabel(state, pos);
         if (pos >= 0) {
@@ -136,11 +166,13 @@ function plugin(md: MarkdownIt, options: Options) {
       } else {
         pos = labelEnd + 1;
       }
-  
+
       // covers label === '' and label === undefined
       // (collapsed reference link and shortcut reference link respectively)
-      if (!label) { label = state.src.slice(labelStart, labelEnd); }
-  
+      if (!label) {
+        label = state.src.slice(labelStart, labelEnd);
+      }
+
       ref = state.env.references[normalizeReference(label)];
       if (!ref) {
         state.pos = oldPos;
@@ -149,37 +181,43 @@ function plugin(md: MarkdownIt, options: Options) {
       href = ref.href;
       title = ref.title;
     }
-  
+
     //
     // We found the end of the link, and know for a fact it's a valid link;
     // so all that's left to do is to call tokenizer.
     //
     if (!silent) {
       content = state.src.slice(labelStart, labelEnd);
-  
-      state.md.inline.parse(
-        content,
-        state.md,
-        state.env,
-        tokens = []
-      );
-  
-      token          = state.push('image', 'img', 0);
-      token.attrs    = attrs = [ [ 'src', href ], [ 'alt', '' ], [ 'style', `width: ${padding}%;margin-left: ${(100 - padding) / 2}%;` ] ];
+
+      state.md.inline.parse(content, state.md, state.env, (tokens = []));
+
+      const margin =
+        align === 'left'
+          ? 0
+          : align === 'center'
+          ? (100 - padding) / 2
+          : 100 - padding;
+
+      token = state.push('image', 'img', 0);
+      token.attrs = attrs = [
+        ['src', href],
+        ['alt', ''],
+        ['style', `width: ${padding}%;margin-left: ${margin}%;`],
+      ];
       token.children = tokens;
-      token.content  = content;
-  
+      token.content = content;
+
       if (title) {
-        attrs.push([ 'title', title ]);
+        attrs.push(['title', title]);
       }
     }
-  
+
     state.pos = pos;
     state.posMax = max;
     return true;
   };
 }
 
-export default function(md: MarkdownIt, options: Options) {
-	md.inline.ruler.before('image', 'pimage', plugin(md, options));
-};
+export default function (md: MarkdownIt, options: Options) {
+  md.inline.ruler.before('image', 'pimage', plugin(md, options));
+}
